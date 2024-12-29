@@ -9,6 +9,7 @@ class Invoice extends Model
 {
     /** @use HasFactory<\Database\Factories\InvoiceFactory> */
     use HasFactory;
+    // multiple invoice belongs to one customer
       public function customer()
     {
         return $this->belongsTo(Customer::class);

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\Invoice;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -9,15 +10,24 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CustomerFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+
+    public function definition()
     {
+        $type=$this->faker->randomElement(['individual','company']);
+        $name=$type=='Individual'?$this->faker->name:$this->faker->company; 
         return [
-            //
+            'name'=>$name,
+            'type'=>$type,
+            'email'=>$this->faker->unique()->safeEmail,
+            'address'=>$this->faker->address,
+            'city'=>$this->faker->city,
+            'state'=>$this->faker->state,
+            'postal_code'=>$this->faker->postcode,
+        
         ];
+    }
+    public function hasInvoices($count)
+    {
+        return $this->has(Invoice::factory()->count($count), 'invoices');
     }
 }
