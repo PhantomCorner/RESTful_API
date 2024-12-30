@@ -9,6 +9,16 @@ class Customer extends Model
 {
     /** @use HasFactory<\Database\Factories\CustomerFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'type',
+        'email',
+        'address',
+        'city',
+        'state',
+        'postal_code',
+    ];
     
 // one customer can have many invoices
     public function invoices()

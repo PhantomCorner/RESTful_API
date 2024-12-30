@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\V1\CustomerResource;
 use App\Http\Resources\V1\CustomerCollection;
 use App\Filters\V1\CustomerFilters;
-
-
+use App\Http\Requests\StoreCustomerRequest;
 class CustomerController extends Controller
 {
     /**
@@ -49,9 +48,9 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCustomerRequest $request)
     {
-        //
+        return new CustomerResource(Customer::create($request->all()));
     }
 
     /**
