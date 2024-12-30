@@ -7,7 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Resources\V1\CustomerResource;
 use App\Http\Resources\V1\CustomerCollection;
-use App\Services\V1\CustomerQuery;
+use App\Filters\V1\CustomerFilters;
 
 
 class CustomerController extends Controller
@@ -25,7 +25,7 @@ class CustomerController extends Controller
         // return new CustomerCollection(Customer::all());
 
         // receive a query parameter to filter customers
-        $filter =new CustomerQuery();
+        $filter =new CustomerFilters();
         $queryItems= $filter ->transform($request);
         if (count($queryItems)== 0){
           return new CustomerCollection(Customer::paginate());
