@@ -15,6 +15,7 @@ class CustomerFilters extends ApiFilter
       'postalCode' => ['eq','lt','gt'],
       'city' => ['eq'],
       'state' => ['eq'],
+    
     ];
     protected $columnMap=[
         'postalCode' => 'postal_code',

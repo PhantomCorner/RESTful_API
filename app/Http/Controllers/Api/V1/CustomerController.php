@@ -26,12 +26,15 @@ class CustomerController extends Controller
 
         // receive a query parameter to filter customers
         $filter =new CustomerFilters();
-        $queryItems= $filter ->transform($request);
-        if (count($queryItems)== 0){
-          return new CustomerCollection(Customer::paginate());
-        }else{ 
-            return new CustomerCollection(Customer::where($queryItems)->paginate());
+        $filterItems= $filter ->transform($request);
+        // if user needs to include invoices
+        $includeInvoices = $request->query('includeInvoices');
+        $customers= Customer::where($filterItems);
+        if($includeInvoices){
+            $customers->with('invoices');
         }
+        return new CustomerCollection($customers->paginate());
+        
       
     }
 
@@ -54,8 +57,13 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer,Request $request)
     {
+        // if user needs to include invoices
+        $includeInvoices = $request->query('includeInvoices');
+        if($includeInvoices){
+          return new CustomerResource($customer->loadMissing('invoices')) ;
+        }
         //
        return new CustomerResource($customer);
     }

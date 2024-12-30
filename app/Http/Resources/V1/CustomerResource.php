@@ -23,6 +23,12 @@ class CustomerResource extends JsonResource
             'address' => $this->address,
             'type' => $this->type,
             'postalCode'=> $this->postal_code,
+            // check if invoices is loaded
+            'inoices' => InvoiceResource::collection($this->whenLoaded('invoices')),
+            // or display all invoices
+            // 'invoices' => InvoiceResource::collection($this->invoices),
+            // or display invoice count
+            // 'invoiceCount' => $this->invoices->count(),
         ];
     }
 }
