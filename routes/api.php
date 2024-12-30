@@ -13,5 +13,8 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1'], function () {
     Route::apiResource('customers', CustomerController::class);
+    // search for a customer
+    // Route::get('customers/{customer}', [CustomerController::class, 'show']);
+
     Route::apiResource('invoices', InvoiceController::class);
 });
