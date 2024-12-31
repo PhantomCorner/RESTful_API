@@ -38,7 +38,7 @@ class StoreCustomerRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        // convert postalCode value from request to postal_code
+        // convert postalCode value from postalCode to postal_code
         $this->merge([
             'postal_code' => $this->postalCode
         ]);
