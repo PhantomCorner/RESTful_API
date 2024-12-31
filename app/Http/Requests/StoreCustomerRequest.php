@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,14 +35,12 @@ class StoreCustomerRequest extends FormRequest
 
         ];
     }
-    
+
     protected function prepareForValidation()
     {
         // convert postalCode value from request to postal_code
-       $this->merge([
-          'postal_code' => $this->postalCode
-       ]); 
+        $this->merge([
+            'postal_code' => $this->postalCode
+        ]);
     }
-  
-
 }
